@@ -88,13 +88,16 @@ function finds distinct and common interaction sets
 def do_comparison(triples):
   distincts=[]
   common=[]
+  print len(triples[0])
+  print len(triples[1])
+  print len(triples[2])
   #we need only one loop to detect all commons!
   s=triples[0]
 
-  #for i,j in triples:
 
+  dist=[]
+  a=[]
   for i in s:
-#    print i
     z=0
     for j in range(1,3):
       #print j
@@ -104,9 +107,74 @@ def do_comparison(triples):
           z=z+1
           #print z
       if z==2:
-         print i,jj
+         #print i,jj
          common.append(i)
-      
+      if z==0:
+        a.append(i)
+  
+  dist.append(a)
+
+  #crappy way...
+  a=[]
+  s=triples[1]
+  for i in s:
+      z=0
+      for j in (0,2):
+                #print j
+       for jj in triples[j]:
+                              #print jj
+         if i[0]==jj[0] and i[1]==jj[1]:
+             z=z+1
+                                                          #print z
+       if z==0:
+            a.append(i)
+  dist.append(a)                                                                                                
+
+  a=[]
+  s=triples[2]
+  for i in s:
+      z=0
+      for j in (0,1):
+                #print j
+       for jj in triples[j]:
+                              #print jj
+         if i[0]==jj[0] and i[1]==jj[1]:
+             z=z+1
+                                                          #print z
+       if z==0:
+            a.append(i)
+  dist.append(a)                                                                                                
+  
+  
+  dd=[]
+  a=[]  
+  s=triples[0]
+  
+  for i in s:
+      for jj in triples[1]:
+	if i[0]==jj[0] and i[1]==jj[1]:
+	     a.append(i)
+
+  dd.append(a)
+  a=[]
+  s=triples[0]
+  z=0
+  for i in s:
+      z=z+1
+      for jj in triples[2]:
+         if i[0]==jj[0] and i[1]==jj[1]:
+	     #print i, jj,z
+	     a.append(i)
+  dd.append(a)
+
+#parami
+  print "wsp: "+str(len(dd[0]))
+  print "wsp: "+str(len(dd[1]))
+  print "wsp: "+str(len(dd))
+
+  print len(dist[0])
+  print len(dist[1])
+  print len(dist[2])
 
   print len(common)
 '''
@@ -132,18 +200,18 @@ for j in range(0,len(chains)):
   
   print "\n"
   for i in org:
-      print len(i)
+#      print "totel: "+str(len(i))
       r.write('total: '+str(len(i))+"\n")
       aa,bb, aa1, bb1=count_vdw(i)
       
-      print "vdw: "+str(aa)+" "+str(bb)+" "+str(aa1)+" "+str(bb1)
+#      print "vdw: "+str(aa)+" "+str(bb)+" "+str(aa1)+" "+str(bb1)
       
       r.write("vdw: "+str(aa)+" "+str(bb)+" "+str(aa1)+" "+str(bb1)+'\n')
       cc,dd,cc1,dd1=count_hb(i)
-      print "hb: "+str(cc)+" "+str(dd)+" "+str(cc1)+" "+str(dd1)
+#      print "hb: "+str(cc)+" "+str(dd)+" "+str(cc1)+" "+str(dd1)
       r.write("hb: "+str(cc)+" "+str(dd)+" "+str(cc1)+" "+str(dd1)+'\n')
       ee,ff,ee1,ff1=count_sb(i)
-      print "sb: "+str(ee)+" "+str(ff)
+#      print "sb: "+str(ee)+" "+str(ff)+" "+str(ee1)+" "+str(ff1)+'\n'
       r.write("sb: "+str(ee)+" "+str(ff)+" "+str(ee1)+" "+str(ff1)+'\n\n')    
            
 r.close() 
