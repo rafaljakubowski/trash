@@ -11,6 +11,7 @@ pat='/home/rafal/doktorat/ttr_con/'
 
 '''
 function extracts the right piece of data from EUCB CONTACT.log
+more info on EUCB: wiki.econ.uoi.gr/wiki/index.php/Eucb
 '''
 def suck_data(inf):
   start=0
@@ -80,11 +81,34 @@ def count_sb(inp):
     md=md+int(i[col_md])
   return s, md, s_z, md_z
 
+'''
+function finds distinct and common interaction sets
+'''
 
+def do_comparison(triples):
+  distincts=[]
+  common=[]
+  #we need only one loop to detect all commons!
+  s=triples[0]
 
-                        
+  #for i,j in triples:
 
+  for i in s:
+#    print i
+    z=0
+    for j in range(1,3):
+      #print j
+      for jj in triples[j]:
+        #print jj
+        if i[0]==jj[0] and i[1]==jj[1]:
+          z=z+1
+          #print z
+      if z==2:
+         print i,jj
+         common.append(i)
+      
 
+  print len(common)
 '''
 main jobs below
 '''
@@ -102,6 +126,9 @@ for j in range(0,len(chains)):
   org=[]
   for i in files:
     org.append(suck_data(i))
+  
+  do_comparison(org)
+
   
   print "\n"
   for i in org:
