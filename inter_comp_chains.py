@@ -209,6 +209,25 @@ def do_comparison(triples, name="TTRA"):
 		ope.write('or ')
   ope.close()
   ope1.close()
+  p1=open('wt_inter_common.dat','w')
+  p1a=open('wt_inter_hbonds_common.dat','w')
+  for i in dd[0]:
+    p1.write(str(i)+"\n")
+    if int(i[6])>0:
+      p1a.write(str(i)+'\n')
+  p1a.close()
+  p1.close()
+
+  p2=open("wt_inter_dist.dat",'w')
+  p2a=open("wt_inter_bonds_dist.dat",'w')
+  for i in dist[0]:
+    p2.write(str(i)+"\n")
+    if int(i[6])>0:
+      p2a.write(str(i)+'\n')
+    
+  p2.close()
+  p2a.close()
+
 #  print len(common)
 '''
 main jobs below
