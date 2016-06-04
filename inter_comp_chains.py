@@ -222,30 +222,31 @@ for j in range(0,len(war)):
  # r.write("\n\n"+chains[j]+'\n\n')
   
   files.append(open(pat+war[j]+"_contact.log",'r'))
+print len(files)
+org=[]
+for i in files:
+   org.append(suck_data(i))
+print len(org)  
+#for i in 
+do_comparison(org,"overall")
+
   
-  org=[]
-  for i in files:
-    org.append(suck_data(i))
-  
-  do_comparison(org,war[j])
-"""
-  
-  print "\n"
-  for i in org:
-#      print "totel: "+str(len(i))
+#  print "\n"
+for i in org:
+      print "totel: "+str(len(i))
       r.write('total: '+str(len(i))+"\n")
       aa,bb, aa1, bb1=count_vdw(i)
       
-#      print "vdw: "+str(aa)+" "+str(bb)+" "+str(aa1)+" "+str(bb1)
+      print "vdw: "+str(aa)+" "+str(bb)+" "+str(aa1)+" "+str(bb1)
       
       r.write("vdw: "+str(aa)+" "+str(bb)+" "+str(aa1)+" "+str(bb1)+'\n')
       cc,dd,cc1,dd1=count_hb(i)
-#      print "hb: "+str(cc)+" "+str(dd)+" "+str(cc1)+" "+str(dd1)
+      print "hb: "+str(cc)+" "+str(dd)+" "+str(cc1)+" "+str(dd1)
       r.write("hb: "+str(cc)+" "+str(dd)+" "+str(cc1)+" "+str(dd1)+'\n')
       ee,ff,ee1,ff1=count_sb(i)
-#      print "sb: "+str(ee)+" "+str(ff)+" "+str(ee1)+" "+str(ff1)+'\n'
+      print "sb: "+str(ee)+" "+str(ff)+" "+str(ee1)+" "+str(ff1)+'\n'
       r.write("sb: "+str(ee)+" "+str(ff)+" "+str(ee1)+" "+str(ff1)+'\n\n')    
            
 r.close()
-"""
+
 #print len(files[0])
