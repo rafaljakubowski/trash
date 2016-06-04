@@ -85,7 +85,7 @@ def count_sb(inp):
 function finds distinct and common interaction sets
 '''
 
-def do_comparison(triples):
+def do_comparison(triples, name="TTRA"):
   distincts=[]
   common=[]
   print len(triples[0])
@@ -175,7 +175,32 @@ def do_comparison(triples):
   print len(dist[0])
   print len(dist[1])
   print len(dist[2])
+#  print dist[1]
+  ope=open(name+"_dist.dat",'w')
+  ope1=open(name+"_hbonds_dist.dat",'w')
+  ope2=open(name+"_sb_dist.dat",'w')	
+  ll=0
+  l1=0
+  for lk in dist[1]:
+	print lk
+		
 
+	a=lk[0].split(':')
+	b=lk[1].split(':')
+	ope.write("(segname "+str((a[0]))+" and (resid "+str(int(a[1]))+" or resid "+b[1]+")) ")
+#	print lk[6]	
+	if int(lk[6])>0:
+			ope1.write("(segname "+str((a[0]))+" and (resid "+str(int(a[1]))+" or resid "+b[1]+")) or ")
+			l1=l1+1
+	if int(lk[7])>0:
+			ope2.write("(segname "+str((a[0]))+" and (resid "+str(int(a[1]))+" or resid "+b[1]+")) or ")
+			l1=l1+1		
+	
+	ll=ll+1
+	if ll<len(dist[1]):
+		ope.write('or ')
+  ope.close()
+  ope1.close()
   print len(common)
 '''
 main jobs below
@@ -195,7 +220,7 @@ for j in range(0,len(chains)):
   for i in files:
     org.append(suck_data(i))
   
-  do_comparison(org)
+  do_comparison(org,chains[j])
 
   
   print "\n"
