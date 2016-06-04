@@ -7,7 +7,7 @@ dirty style variables definitio; why use command line?
 '''
 war=['wt','l55p','v30m']
 chains=['TTRA','TTRB','TTRC','TTRD']
-pat='/home/rafal/doktorat/ttr_con/'
+pat='/home/rafal/doktorat/ttr_con/all/'
 
 '''
 function extracts the right piece of data from EUCB CONTACT.log
@@ -213,23 +213,22 @@ def do_comparison(triples, name="TTRA"):
 '''
 main jobs below
 '''
-r=open('grube_in.dat','w')                      
+r=open('grube_inter_in.dat','w')                      
 files=[]
+#do_chain=j
 
-for j in range(0,len(chains)):
-  print "\n\n"+chains[j]
-  r.write("\n\n"+chains[j]+'\n\n')
-  do_chain=j
-  files=[]
-  for i in war:
-    files.append(open(pat+i+"/CONTACT_"+chains[do_chain]+"_"+chains[do_chain]+".log",'r'))
+for j in range(0,len(war)):
+#  print "\n\n"+chains[j]
+ # r.write("\n\n"+chains[j]+'\n\n')
+  
+  files.append(open(pat+war[j]+"_contact.log",'r'))
   
   org=[]
   for i in files:
     org.append(suck_data(i))
   
-  do_comparison(org,chains[j])
-
+  do_comparison(org,war[j])
+"""
   
   print "\n"
   for i in org:
@@ -247,5 +246,6 @@ for j in range(0,len(chains)):
 #      print "sb: "+str(ee)+" "+str(ff)+" "+str(ee1)+" "+str(ff1)+'\n'
       r.write("sb: "+str(ee)+" "+str(ff)+" "+str(ee1)+" "+str(ff1)+'\n\n')    
            
-r.close() 
+r.close()
+"""
 #print len(files[0])

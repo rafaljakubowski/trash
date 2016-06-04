@@ -179,21 +179,29 @@ def do_comparison(triples, name="TTRA"):
   ope=open(name+"_dist.dat",'w')
   ope1=open(name+"_hbonds_dist.dat",'w')
   ope2=open(name+"_sb_dist.dat",'w')	
+  ope3=open(name+"_pure_list.dat",'w')
+  ope4=open(name+"_all_pure_list.dat",'w')
   ll=0
   l1=0
   for lk in dist[1]:
-	print lk
+#	print lk
 		
 
 	a=lk[0].split(':')
 	b=lk[1].split(':')
 	ope.write("(segname "+str((a[0]))+" and (resid "+str(int(a[1]))+" or resid "+b[1]+")) ")
+        ope4.write(str(lk)+"\n")
+	                        
 #	print lk[6]	
 	if int(lk[6])>0:
 			ope1.write("(segname "+str((a[0]))+" and (resid "+str(int(a[1]))+" or resid "+b[1]+")) or ")
+			#ope4.write(str(lk)+"\n")
+                        ope3.write(str(lk)+"\n")
+			                        
 			l1=l1+1
 	if int(lk[7])>0:
 			ope2.write("(segname "+str((a[0]))+" and (resid "+str(int(a[1]))+" or resid "+b[1]+")) or ")
+			#ope3.write(str(lk)+"\n")
 			l1=l1+1		
 	
 	ll=ll+1
@@ -201,7 +209,7 @@ def do_comparison(triples, name="TTRA"):
 		ope.write('or ')
   ope.close()
   ope1.close()
-  print len(common)
+#  print len(common)
 '''
 main jobs below
 '''
